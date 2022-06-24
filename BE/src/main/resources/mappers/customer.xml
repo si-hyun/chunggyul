@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hack.greenmandarine.mapper.CustomerMapper">
+
+	<select id="login" parameterType="CustomerDto" resultType="CustomerDto">
+		select *
+		from customer
+		where customer_id = #{customer_id} and customer_pw = #{customer_pw}
+	</select>
+	
+<!--  	
+	<select id="userInfo" parameterType="String" resultType="memberDto">
+		select username, userid, email, joindate
+		from ssafy_member
+		where userid = #{userid}
+	</select>
+	
+	<delete id="deleteInfo" parameterType="String">
+		delete 
+		from ssafy_member
+		where userid = #{userid}
+	</delete>
+	
+	<update id="updateInfo" parameterType="memberDto">
+		update ssafy_member
+		set userpwd = #{userpwd}
+		where userid = #{userid}
+	</update>
+	
+	<select id="checkId" parameterType="String" resultType="Integer">
+		select count(userid)
+		from ssafy_member
+		where userid = #{userid}
+	</select>
+	
+	<insert id="insertInfo" parameterType="memberDto">
+		insert into ssafy_member
+		values(#{userid},#{username},#{userpwd},#{email},now())
+	</insert>
+-->
+
+</mapper>

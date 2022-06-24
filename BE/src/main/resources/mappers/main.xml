@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hack.greenmandarine.mapper.MainMapper">
+
+	<select id="getInfo" parameterType="CustomerDto" resultType="CustomerDto">
+		SELECT
+				*
+		FROM
+				CUSTOMER
+		WHERE
+				CUSTOMER_ID = #{customer_id}
+	</select>
+	
+	<update id="generate" parameterType="CustomerDto">
+		where customer_id = #{customer_id} and gm_yn = 'N'
+		UPDATE 
+				CUSTOMER
+		SET
+				GM = #{gm},
+				GM_GRADE = #{gm_grade},
+				GM_YN = 'Y'
+		WHERE
+				CUSTOMER_ID = #{customer_id} AND GM_YN = 'N'
+	</update>
+	
+	<select id="recommend" parameterType="CustomerDto" resultType="UserBehaviorDto">
+		SELECT
+				ROUND((AVG(T.NB_U_TIME) / U.NB_U_TIME),2) AS NB_U_TIME,
+				ROUND((AVG(T.COM_FEE_DLY_CNT) / U.COM_FEE_DLY_CNT),2) AS COM_FEE_DLY_CNT,
+				ROUND((AVG(T.SNS_FRIEND_CNT) / U.SNS_FRIEND_CNT),2) AS SNS_FRIEND_CNT,
+				ROUND((AVG(T.EMAIL_CHCK_RATIO) / U.EMAIL_CHCK_RATIO),2) AS EMAIL_CHCK_RATIO,
+				ROUND((AVG(T.AVG_GRADE) / U.AVG_GRADE),2) AS AVG_GRADE,
+				ROUND((AVG(T.M_SEARCH_CNT_AVG) / U.M_SEARCH_CNT_AVG),2) AS M_SEARCH_CNT_AVG,
+				ROUND((AVG(T.SNS_UPLOAD_CNT) / U.SNS_UPLOAD_CNT),2) AS SNS_UPLOAD_CNT,
+				ROUND((AVG(T.P_TEST_SCORE) / U.P_TEST_SCORE),2) AS P_TEST_SCORE
+		FROM
+				USER_BEHAVIOR T,
+		        USER_BEHAVIOR U
+		WHERE
+				U.CUSTOMER_ID = #{customer_id}
+	</select>
+
+	<!-- 여기도 청귤 점수에 따라서 대출 상품 가져오도록 수정해야 함 -->
+	<select id="checkPossLoan">
+		SELECT * FROM CREDIT_LOAN
+	</select>
+	
+	
+	<resultMap type="hashmap" id="category">
+		<result column="CATEGORY" property="category"/>
+		<result column="TOTAL_COST" property="total_cost"/>
+	</resultMap>
+	<select id="categoryInfo" parameterType="CustomerDto" resultMap="category">
+		SELECT 
+				T_CATEGORY AS CATEGORY,
+		        SUM(COST) AS TOTAL_COST
+		FROM
+				TRANSACTION_LIST
+		WHERE
+				CUSTOMER_ID = #{customer_id} AND MONTH(TRANS_DATE) = MONTH(NOW()) 
+		GROUP BY
+				T_CATEGORY
+		ORDER BY 
+				SUM(COST) DESC
+		LIMIT 
+				3
+	</select>
+	
+	<select id="transferCount" parameterType="CustomerDto" resultType="int">
+		SELECT
+				COUNT(PRODUCT_TYPE)
+		FROM
+				TRANSACTION_LIST
+		WHERE
+				CUSTOMER_ID = #{customer_id} AND (PRODUCT_TYPE = '입금' OR PRODUCT_TYPE = '출금') AND MONTH(TRANS_DATE) = MONTH(NOW())
+	</select>
+	
+	<!-- 수정해야댐 -->
+	<select id="spendIncomeRatio" parameterType="CustomerDto" resultType="TransactionDto">
+		SELECT * FROM TRANSACTION_LIST WHERE CUSTOMER_ID = #{customer_id}
+	</select>
+	
+	
+	
+	<!-- 여기도 청귤 점수에 따라서 정책 가져오도록 수정해야 함 -->
+	<select id="getPolicy">
+		SELECT * FROM POLICY
+	</select>
+	
+	<!-- showOthers 처리할 쿼리문 필요 -->
+	
+
+</mapper>
