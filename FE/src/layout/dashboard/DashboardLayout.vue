@@ -9,10 +9,10 @@
           icon="ti-user"
         />
         <sidebar-link
-          to="/score"
-          name="청귤 점수"
+          to="/loanproducts"
+          name="맞춤 대출 상품"
           description="마이청귤설명대충"
-          icon="ti-dashboard"
+          icon="ti-wallet"
         />
         <sidebar-link
           to="/planner"
@@ -46,13 +46,7 @@
           icon="ti-stats-up"
           hidden="hidden"
         />
-        <sidebar-link
-          to="/loanproducts"
-          name="맞춤 대출 상품"
-          description="마이청귤설명대충"
-          icon="ti-wallet"
-          hidden="hidden"
-        />
+
         <!-- <sidebar-link to="/icons" name="Icons" icon="ti-pencil-alt2" />
         <sidebar-link to="/maps" name="Map" icon="ti-map" />
         <sidebar-link to="/notifications" name="Notifications" icon="ti-bell" /> -->

@@ -1,260 +1,249 @@
 <template>
   <div>
-    <!--카테고리별 소비금액-->
+    <!-- 상단 소비 카테고리 탑3 -->
     <div class="row">
-      <div class="col-md-6 col-xl-3" v-for="regs in regCards" :key="regs.title">
+      <!-- 1위 카테고리 -->
+      <div class="col-md-6 col-xl-3">
         <card>
           <div>
-            <p style="font-size: 20px">
-              <img :src="regs.img" alt="" style="height: 30px" />
-              {{ regs.title }}
+            <div class="numdiv" style="position: relative">1</div>
+            <div class="categoryname" style="position: absolute">
+              <p style="font-size: 30px; font-weight: bold">
+                {{ myChunggyulInfo.category1 }}💪
+              </p>
+            </div>
+            <p
+              style="
+                text-align: center;
+                font-size: 40px;
+                position: absolute;
+                right: 20px;
+                top: 60px;
+              "
+            >
+              {{ myChunggyulInfo.total_cost1.toLocaleString() }} 원
             </p>
-            <p style="text-align: center; font-size: 30px">{{ regs.value }}</p>
+          </div>
+        </card>
+      </div>
+      <!-- 2위 카테고리 -->
+      <div class="col-md-6 col-xl-3">
+        <card>
+          <div>
+            <div class="numdiv" style="position: relative">2</div>
+            <div class="categoryname" style="position: absolute">
+              <p style="font-size: 30px; font-weight: bold">쇼핑 🛒</p>
+            </div>
+            <p
+              style="
+                text-align: center;
+                font-size: 40px;
+                position: absolute;
+                right: 20px;
+                top: 60px;
+              "
+            >
+              223,600 원
+            </p>
+          </div>
+        </card>
+      </div>
+      <!-- 3위 카테고리 -->
+      <div class="col-md-6 col-xl-3">
+        <card>
+          <div>
+            <div class="numdiv" style="position: relative">3</div>
+            <div class="categoryname" style="position: absolute">
+              <p style="font-size: 30px; font-weight: bold">패션/뷰티 💄</p>
+            </div>
+            <p
+              style="
+                text-align: center;
+                font-size: 40px;
+                position: absolute;
+                right: 20px;
+                top: 60px;
+              "
+            >
+              175,500 원
+            </p>
+          </div>
+        </card>
+      </div>
+      <!-- 계좌이체 -->
+      <div class="col-md-6 col-xl-3">
+        <card>
+          <div>
+            <div
+              class="numdiv"
+              style="position: relative; font-size: 120px; top: -38px"
+            >
+              <img
+                src="./..\assets\img\transfer3.png"
+                alt=""
+                style="
+                  top: 40px;
+                  max-width: 110px;
+                  position: absolute;
+                  opacity: 0.5;
+                "
+              />
+            </div>
+            <div class="categoryname" style="position: absolute">
+              <p style="font-size: 30px; font-weight: bold">계좌이체💸</p>
+            </div>
+            <p
+              style="
+                text-align: center;
+                font-size: 40px;
+                position: absolute;
+                right: 20px;
+                top: 60px;
+              "
+            >
+              4 건
+            </p>
           </div>
         </card>
       </div>
     </div>
-    <!-- 소득입력 및 내친구 청귤이 버튼 -->
-    <div style="display: block; margin-bottom: 20px; height: 60px; width: 100%">
-      <div class="middleline">
-        <p style="margin-top: 0px">월 고정 소득을 입력하세요</p>
-        <form action="">
-          <input
-            type="text"
-            placeholder="1000000"
-            style="
-              width: 95%;
-              border: none;
-              border-bottom: 1px solid orange;
-              background-color: transparent;
-              margin-right: 1%;
-            "
-          />
-        </form>
-      </div>
-      <div class="middleline">
-        <p style="margin-top: 0px">이번달 추가 소득을 입력하세요</p>
-        <form action="">
-          <input
-            type="text"
-            placeholder="1000000"
-            style="
-              width: 95%;
-              border: none;
-              border-bottom: 1px solid orange;
-              background-color: transparent;
-              margin-right: 1%;
-            "
-          />
-        </form>
-      </div>
-      <div
-        style="
-          display: inline-block;
-          width: 49.2%;
-          float: right;
-          margin-right: 10px;
-        "
-      >
-        <a href="myfriend">
-          <button class="xbutton">나와 비슷한 청귤이 보러가기</button>
-        </a>
-      </div>
-    </div>
-    <!--Charts-->
+    <!-- 청귤점수랑 파이차트 -->
     <div class="row">
       <div class="col-6">
-        <chart-card
-          title="카드 소비 내역"
-          sub-title="24 Hours performance"
-          :chart-data="usersChart.data"
-          :chart-options="usersChart.options"
-        >
-          <span slot="footer">
-            <i class="ti-reload"></i> Updated 3 minutes ago
-          </span>
-          <div slot="legend">
-            <span
-              class="dot"
-              style="background-color: rgba(158, 221, 147, 1)"
-            ></span>
-            카페
-            <span
-              class="dot"
-              style="background-color: rgba(232, 192, 106, 1)"
-            ></span>
-            의료
-            <span
-              class="dot"
-              style="background-color: rgba(219, 137, 37, 1)"
-            ></span>
-            쇼핑
+        <!-- 청귤점수 -->
+        <card style="height: 460px; background-color: #99d35c">
+          <div
+            v-if="customerInfo.gm == 0"
+            style="
+              width: 50%;
+              height: 100%;
+              float: left;
+              border-right: solid 1px #f4f3ef;
+              text-align: center;
+              color: black;
+            "
+          >
+            <div style="margin-top: 100px; font-size: 30px">
+              지금 청귤 점수를<br />
+              확인해보세요!
+            </div>
+            <a href="gmtest">
+              <button class="xbutton" style="margin-top: 60px">
+                청귤점수 확인
+              </button>
+            </a>
           </div>
-        </chart-card>
+          <div
+            v-else
+            style="
+              width: 50%;
+              height: 100%;
+              float: left;
+              border-right: solid 1px #f4f3ef;
+              text-align: center;
+              color: white;
+            "
+          >
+            <br />
+            <h3 style="margin-top: 60px; font-size: 40px; font-weight: 500">
+              청귤점수
+            </h3>
+            <h1
+              style="
+                font-size: 100px;
+                font-weight: 500;
+                margin-top: 10px;
+                margin-bottom: 30px;
+              "
+            >
+              {{ customerInfo.gm }}
+            </h1>
+            <a href="improvescore"
+              ><button class="xbutton">My 청귤 점수 올리기</button></a
+            >
+          </div>
+          <!-- NICE & KCB -->
+          <div style="width: 50%; float: right">
+            <div style="height: 190px; float: top; margin-left: 20px">
+              <h3>NICE</h3>
+              <h1 style="text-align: center; font-weight: 500">
+                {{ customerInfo.nice }}
+              </h1>
+            </div>
+            <hr style="color: white; margin-top: 0px" />
+            <div style="float: bottom; margin-left: 20px">
+              <h3>KCB</h3>
+              <h1 style="text-align: center; font-weight: 500">
+                {{ customerInfo.kcb }}
+              </h1>
+            </div>
+          </div>
+        </card>
+        <!-- <card title="My 청귤점수" style="height: 460px">
+          <h3>{{ customerInfo.gm }}점</h3>
+          <p>상위 24%</p>
+        </card> -->
       </div>
+      <!-- 파이차트 -->
       <div class="col-6">
         <chart-card
-          title="Email Statistics"
-          sub-title="Last campaign performance"
+          title="소비 카테고리별 비율"
+          sub-title="상위 3개 카테고리"
           :chart-data="preferencesChart.data"
           chart-type="Pie"
+          style="height: 460px"
         >
           <span slot="footer">
-            <i class="ti-timer"></i> Campaign set 2 days ago</span
+            <i class="ti-timer"></i> 마지막 업데이트 2분 전</span
           >
           <div slot="legend">
-            <span
-              class="dot"
-              style="background-color: rgba(158, 221, 147, 1)"
-            ></span>
-            카페
-            <span
-              class="dot"
-              style="background-color: rgba(232, 192, 106, 1)"
-            ></span>
-            의료
-            <span
-              class="dot"
-              style="background-color: rgba(219, 137, 37, 1)"
-            ></span>
+            <span class="dot" style="background-color: #99d35c"></span>
+            {{ myChunggyulInfo.category1 }}
+            <span class="dot" style="background-color: #eacc60"></span>
             쇼핑
+            <span class="dot" style="background-color: #eea71a"></span>
+            패션/뷰티
           </div>
         </chart-card>
       </div>
-
-      <!-- <div class="col-md-6 col-12">
-        <chart-card
-          title="2015 Sales"
-          sub-title="All products including Taxes"
-          :chart-data="activityChart.data"
-          :chart-options="activityChart.options"
-        >
-          <span slot="footer">
-            <i class="ti-check"></i> Data information certified
-          </span>
-          <div slot="legend">
-            <i class="fa fa-circle text-info"></i> Tesla Model S
-            <i class="fa fa-circle text-warning"></i> BMW 5 Series
-          </div>
-        </chart-card>
-      </div> -->
     </div>
   </div>
 </template>
 <script>
 import { StatsCard, ChartCard, RegCard } from "@/components/index";
+import { mapState } from "vuex";
 import Chartist from "chartist";
+
 export default {
   components: {
     StatsCard,
     ChartCard,
-    RegCard,
   },
 
   /**
-   * Chart data used to render stats, charts. Should be replaced with server data
+   * Chart data used to render stats, scharts. Should be replaced with server data
    */
   data() {
     return {
-      regCards: [
-        {
-          title: "카페",
-          value: "100,300" + "원",
-          img: require(`./../assets/img/coffee.png`),
-        },
-        {
-          title: "의료",
-          value: "210,000" + "원",
-          img: require(`./../assets/img/medicine.png`),
-        },
-        {
-          title: "쇼핑",
-          value: "16,211" + "원",
-          img: require(`./../assets/img/shopping.png`),
-        },
-        {
-          title: "계좌이체",
-          value: "4" + "건",
-          img: require(`./../assets/img/transfer.png`),
-        },
-      ],
-      usersChart: {
-        data: {
-          labels: [
-            "9:00AM",
-            "12:00AM",
-            "3:00PM",
-            "6:00PM",
-            "9:00PM",
-            "12:00PM",
-            "3:00AM",
-            "6:00AM",
-          ],
-          series: [
-            [287, 385, 490, 562, 594, 626, 698, 895, 952],
-            [67, 152, 193, 240, 387, 435, 535, 642, 744],
-            [23, 113, 67, 108, 190, 239, 307, 410, 410],
-          ],
-        },
-        options: {
-          low: 0,
-          high: 1000,
-          showArea: true,
-          height: "245px",
-          axisX: {
-            showGrid: false,
-          },
-          lineSmooth: Chartist.Interpolation.simple({
-            divisor: 3,
-          }),
-          showLine: true,
-          showPoint: false,
-        },
-      },
-      activityChart: {
-        data: {
-          labels: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "Mai",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-          ],
-          series: [
-            [542, 543, 520, 680, 653, 753, 326, 434, 568, 610, 756, 895],
-            [230, 293, 380, 480, 503, 553, 600, 664, 698, 710, 736, 795],
-          ],
-        },
-        options: {
-          seriesBarDistance: 10,
-          axisX: {
-            showGrid: false,
-          },
-          height: "245px",
-        },
-      },
       preferencesChart: {
         data: {
-          labels: ["62%", "32%", "6%"],
-          series: [62, 32, 6],
+          labels: ["45.67%", "30.44%", "23.89%"],
+          series: [335500, 223600, 175500],
         },
         options: {},
       },
     };
+  },
+  computed: {
+    ...mapState("customerStore", ["customerInfo", "myChunggyulInfo"]),
   },
 };
 </script>
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
 * {
   font-family: "IBM Plex Sans KR", "Nanum Gothic", "Muli", "Helvetica", Arial,
     sans-serif;
@@ -264,15 +253,20 @@ export default {
   width: 25%;
 }
 .xbutton {
-  margin-left: 10px;
-  width: 100%;
+  width: 50%;
   height: 60px;
+  font-weight: 600;
+  font-size: 16px;
   border-radius: 7px;
   border: none;
-  background-color: rgba(146, 208, 80, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: transform 0.2s;
 }
 .xbutton:hover {
-  background-color: rgba(146, 208, 80, 1);
+  background-color: rgb(255, 255, 255);
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  transform: scale(1.1);
 }
 .dot {
   height: 10px;
@@ -280,5 +274,26 @@ export default {
   border-radius: 50%;
   display: inline-block;
   margin-left: 10px;
+}
+
+.numdiv {
+  position: relative;
+  font-size: 80px;
+  font-weight: 600;
+  font-style: italic;
+  color: rgba(146, 208, 80, 0.5);
+  width: 100px;
+  height: 100px;
+  top: -30px;
+  left: 0px;
+  font-family: "IBM Plex Sans KR";
+}
+
+.categoryname {
+  position: absolute;
+  width: 500px;
+  height: 100px;
+  left: 80px;
+  top: 20px;
 }
 </style>

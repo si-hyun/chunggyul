@@ -14,12 +14,8 @@ public class CustomerDto {
 	private String phone;
 	private String gm_yn;
 	private int gm;
-	private int gm_grade;
 	private int nice;
-	private int nice_grade;
 	private int kcb;
-	private int kcb_grade;
-	
 	public String getCustomer_id() {
 		return customer_id;
 	}
@@ -93,30 +89,12 @@ public class CustomerDto {
 		this.kcb = kcb;
 	}
 	
-	public int getGm_grade() {
-		return gm_grade;
-	}
-	public void setGm_grade(int gm_grade) {
-		this.gm_grade = gm_grade;
-	}
-	public int getNice_grade() {
-		return nice_grade;
-	}
-	public void setNice_grade(int nice_grade) {
-		this.nice_grade = nice_grade;
-	}
-	public int getKcb_grade() {
-		return kcb_grade;
-	}
-	public void setKcb_grade(int kcb_grade) {
-		this.kcb_grade = kcb_grade;
-	}
 	public CustomerDto() {
 		
 	}
+	
 	public CustomerDto(String customer_id, String customer_pw, String customer_name, Date birth_date, int age,
-			String thin_filer_type, String email, String phone, String gm_yn, int gm, int gm_grade, int nice,
-			int nice_grade, int kcb, int kcb_grade) {
+			String thin_filer_type, String email, String phone, String gm_yn, int gm, int nice, int kcb) {
 		super();
 		this.customer_id = customer_id;
 		this.customer_pw = customer_pw;
@@ -128,14 +106,9 @@ public class CustomerDto {
 		this.phone = phone;
 		this.gm_yn = gm_yn;
 		this.gm = gm;
-		this.gm_grade = gm_grade;
 		this.nice = nice;
-		this.nice_grade = nice_grade;
 		this.kcb = kcb;
-		this.kcb_grade = kcb_grade;
 	}
-	
-	
 
 	
 

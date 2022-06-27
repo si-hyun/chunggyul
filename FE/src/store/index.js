@@ -5,10 +5,12 @@ import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);
 
 import customerStore from "@/store/modules/customerStore.js";
+import productStore from "@/store/modules/productStore.js";
 
 const store = new Vuex.Store({
   modules: {
     customerStore,
+    productStore,
   },
   plugins: [
     createPersistedState({

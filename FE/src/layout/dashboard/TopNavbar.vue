@@ -27,7 +27,7 @@
         </button>
         <div v-else>
           {{ customerInfo.customer_name }}님 환영합니다!
-          <button>로그아웃</button>
+          <button class="login-btn" @click="goLogout()">로그아웃</button>
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
 </template>
 <script>
 import DashboardLayout from "./DashboardLayout.vue";
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   components: {
@@ -51,9 +51,17 @@ export default {
     ...mapState("customerStore", ["customerInfo"]),
   },
   methods: {
+    ...mapMutations("customerStore", ["SET_LOGOUT"]),
     goLoginPage() {
       console.log(this.$route.matched[1].meta.description);
+      console.log(this.$route);
+      console.log(this.$router);
       this.$router.push({ name: "login" });
+    },
+    goLogout() {
+      this.SET_LOGOUT();
+      this.$router.push({ name: "home" });
+      console.log("로그아웃");
     },
   },
 };

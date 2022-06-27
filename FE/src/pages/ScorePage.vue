@@ -9,14 +9,18 @@
             width: 49%;
             height: 400px;
             float: left;
-            background-color: rgba(245, 218, 113);
+            background-color: rgba(146, 208, 80, 1);
           "
         >
           <div
             v-if="customerInfo.gm == 0"
-            style="font-size: 20px; text-align: center; padding-top: 50px"
+            style="font-size: 40px; text-align: center; padding-top: 50px"
           >
-            지금 청귤점수를 확인해보세요!
+            지금 청귤 점수를 확인해보세요!
+            <br />
+            <a href="gmtest">
+              <button class="ybutton">청귤 점수 산정하기</button>
+            </a>
           </div>
           <div
             v-else
@@ -31,14 +35,18 @@
           sub-title="상위 43%"
           style="width: 49%; height: 190px; float: right"
         >
-          <p style="font-size: 40px; text-align: center">634점</p>
+          <p style="font-size: 40px; text-align: center">
+            {{ customerInfo.nice }}점
+          </p>
         </card>
         <card
           title="KCB"
           sub-title="상위 38%"
           style="width: 49%; height: 190px; float: right"
         >
-          <p style="font-size: 40px; text-align: center">709점</p>
+          <p style="font-size: 40px; text-align: center">
+            {{ customerInfo.kcb }}점
+          </p>
         </card>
       </div>
     </div>
@@ -76,7 +84,7 @@ export default {
   methods: {},
 };
 </script>
-<style>
+<style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap");
 
@@ -94,5 +102,19 @@ export default {
 
 .xbutton:hover {
   background-color: rgb(225, 240, 168);
+}
+
+.ybutton {
+  margin-top: 50px;
+  width: 300px;
+  height: 100px;
+  border: none;
+  background-color: white;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.ybutton:hover {
+  background-color: rgb(230, 254, 213);
 }
 </style>

@@ -18,9 +18,11 @@ import App from "./App";
 import router from "./router/index";
 import store from "./store";
 
+//import VueSweetalert2 from "vue-sweetalert2";
 import PaperDashboard from "./plugins/paperDashboard";
 import "vue-notifyjs/themes/default.css";
 
+//Vue.use(VueSweetalert2);
 Vue.use(PaperDashboard);
 
 /* eslint-disable no-new */
